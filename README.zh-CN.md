@@ -1,4 +1,4 @@
-# LRTemplate2XMPFormatter
+# LRtemplate2XMPPresets
 
 [English](./README.md) | 简体中文 | [繁體中文（台灣）](./README.zh-TW.md)
 

@@ -11,6 +11,36 @@
   --success: #236a43;
   --error: #a52d2d;
   --shadow: 0 18px 45px rgba(63, 45, 22, 0.1);
+  --font-sans-latin: "Source Sans 3", "Segoe UI", sans-serif;
+  --font-serif-latin: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-code: "Source Code Pro", "SFMono-Regular", Consolas, monospace;
+  --font-sans-sc:
+    "Source Han Sans SC",
+    "Source Han Sans CN",
+    "Noto Sans SC",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  --font-sans-tc:
+    "Source Han Sans TC",
+    "Source Han Sans",
+    "Noto Sans TC",
+    "PingFang TC",
+    "Microsoft JhengHei",
+    sans-serif;
+  --font-serif-sc:
+    "Source Han Serif SC",
+    "Source Han Serif CN",
+    "Noto Serif SC",
+    "Songti SC",
+    serif;
+  --font-serif-tc:
+    "Source Han Serif TC",
+    "Source Han Serif",
+    "Noto Serif TC",
+    "Songti TC",
+    "PMingLiU",
+    serif;
 }
 
 * {
@@ -19,11 +49,19 @@
 
 body {
   margin: 0;
-  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  font-family: var(--font-sans-latin);
   color: var(--ink);
   background:
     radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 35%),
     linear-gradient(140deg, #efe0cc 0%, #f5efe7 45%, #ebe6dc 100%);
+}
+
+html[lang="zh-CN"] body {
+  font-family: var(--font-sans-sc);
+}
+
+html[lang="zh-TW"] body {
+  font-family: var(--font-sans-tc);
 }
 
 .page {
@@ -90,9 +128,21 @@ body {
 h1,
 h2 {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-serif-latin);
   font-weight: 600;
   line-height: 1.08;
+}
+
+html[lang="zh-CN"] h1,
+html[lang="zh-CN"] h2 {
+  font-family: var(--font-serif-sc);
+  font-weight: 700;
+}
+
+html[lang="zh-TW"] h1,
+html[lang="zh-TW"] h2 {
+  font-family: var(--font-serif-tc);
+  font-weight: 700;
 }
 
 h1 {
@@ -100,6 +150,13 @@ h1 {
   font-size: clamp(2.1rem, 4vw, 3.6rem);
   line-height: 0.97;
   letter-spacing: -0.04em;
+}
+
+html[lang="zh-CN"] h1,
+html[lang="zh-TW"] h1 {
+  max-width: 12ch;
+  line-height: 1.08;
+  letter-spacing: 0;
 }
 
 h2 {
@@ -112,6 +169,11 @@ h2 {
   color: var(--muted);
   font-size: 0.98rem;
   line-height: 1.62;
+}
+
+code {
+  font-family: var(--font-code);
+  font-size: 0.92em;
 }
 
 .card {
