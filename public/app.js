@@ -3,6 +3,8 @@ import { createZipBlob } from "./zip.js";
 
 const groupNameInput = document.querySelector("#groupName");
 const fileInput = document.querySelector("#fileInput");
+const browseButton = document.querySelector("#browseButton");
+const fileSelection = document.querySelector("#fileSelection");
 const dropZone = document.querySelector("#dropZone");
 const convertButton = document.querySelector("#convertButton");
 const downloadButton = document.querySelector("#downloadButton");
@@ -42,8 +44,17 @@ function normalizeFiles(files) {
 
 function refreshSelectedSummary() {
   if (!selectedFiles.length) {
+    fileSelection.textContent = "No files selected.";
+    fileSelection.title = "";
     setSummary("No files converted yet.");
     return;
+  }
+  if (selectedFiles.length === 1) {
+    fileSelection.textContent = selectedFiles[0].name;
+    fileSelection.title = selectedFiles[0].name;
+  } else {
+    fileSelection.textContent = `${selectedFiles.length} files selected`;
+    fileSelection.title = selectedFiles.map((file) => file.name).join("\n");
   }
   setSummary(`${selectedFiles.length} file(s) ready to convert.`);
 }
@@ -114,6 +125,8 @@ function clearAll() {
   fileInput.value = "";
   resultsBody.innerHTML = "";
   downloadButton.disabled = true;
+  fileSelection.textContent = "No files selected.";
+  fileSelection.title = "";
   setSummary("No files converted yet.");
 }
 
@@ -128,6 +141,10 @@ function activateDropZone(active) {
 
 fileInput.addEventListener("change", (event) => {
   applyFiles(event.target.files ?? []);
+});
+
+browseButton.addEventListener("click", () => {
+  fileInput.click();
 });
 
 convertButton.addEventListener("click", () => {
