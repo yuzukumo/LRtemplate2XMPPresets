@@ -4,79 +4,92 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>LRTemplate to XMP Preset</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="page">
       <section class="masthead">
         <section class="hero">
-          <p class="eyebrow">Pure Frontend Lightroom Tool</p>
-          <h1>Convert legacy <code>.lrtemplate</code> files into XMP presets</h1>
-          <p class="lede">
-            Conversion runs entirely in your browser. The Cloudflare Worker only
-            serves this static app and never uploads your preset files.
+          <div class="hero-top">
+            <div id="localeSwitcher" class="locale-switcher" aria-label="Language">
+              <button class="locale-button is-active" type="button" data-lang="en">EN</button>
+              <button class="locale-button" type="button" data-lang="zh-CN">简中</button>
+              <button class="locale-button" type="button" data-lang="zh-TW">繁中</button>
+            </div>
+          </div>
+          <h1 id="heroTitle">Convert legacy <code>.lrtemplate</code> files into XMP presets</h1>
+          <p id="heroLead" class="lede">
+            Conversion runs entirely in your browser. The Cloudflare Worker only serves this
+            static app and never uploads your preset files.
           </p>
         </section>
 
         <section class="card controls">
           <div class="field">
-            <label for="groupName">Preset group</label>
-            <input id="groupName" type="text" value="User Presets" />
+            <div class="field-head">
+              <label id="groupNameLabel" for="groupName">Preset group</label>
+              <label class="toggle" for="overrideGroup">
+                <input id="overrideGroup" type="checkbox" />
+                <span id="overrideGroupLabel">Override</span>
+              </label>
+            </div>
+            <input
+              id="groupName"
+              type="text"
+              value="User Presets"
+              placeholder="Leave the group unchanged"
+              disabled
+            />
+            <p id="groupHint" class="field-hint">
+              Disabled by default. Turn this on only if you want every converted preset to use
+              the same Lightroom group.
+            </p>
           </div>
 
           <div class="field">
-            <label for="fileInput">Select <code>.lrtemplate</code> files</label>
+            <label id="fileInputLabel" for="fileInput">Select <code>.lrtemplate</code> files</label>
             <input id="fileInput" class="sr-only" type="file" accept=".lrtemplate" multiple />
-            <div class="file-picker" role="group" aria-label="File selection">
-              <button id="browseButton" class="button picker" type="button">
-                Choose Files
-              </button>
+            <div id="filePicker" class="file-picker" role="group" aria-label="File selection">
+              <button id="browseButton" class="button picker" type="button">Choose Files</button>
               <p id="fileSelection" class="file-selection">No files selected.</p>
             </div>
           </div>
 
-          <div id="dropZone" class="drop-zone" tabindex="0">
-            Drop <code>.lrtemplate</code> files here
-          </div>
+          <div id="dropZone" class="drop-zone" tabindex="0">Drop <code>.lrtemplate</code> files here</div>
 
           <div class="actions">
-            <button id="convertButton" class="button primary" type="button">
-              Convert Files
-            </button>
-            <button id="downloadButton" class="button" type="button" disabled>
-              Download ZIP
-            </button>
-            <button id="clearButton" class="button ghost" type="button">
-              Clear
-            </button>
+            <button id="convertButton" class="button primary" type="button">Convert Files</button>
+            <button id="downloadButton" class="button" type="button" disabled>Download ZIP</button>
+            <button id="clearButton" class="button ghost" type="button">Clear</button>
           </div>
         </section>
       </section>
 
       <section class="content-grid">
         <section class="card notes">
-          <h2>What this app outputs</h2>
+          <h2 id="notesTitle">What this app outputs</h2>
           <ul>
-            <li>XMP preset files with <code>crs:PresetType="Normal"</code>.</li>
-            <li>Modern XMP metadata aligned to Adobe Camera Raw preset structure.</li>
-            <li>Tone curves, gradient masks, and circular masks when present.</li>
-            <li>Configured group names via the input above.</li>
+            <li id="note1">XMP preset files with <code>crs:PresetType="Normal"</code>.</li>
+            <li id="note2">Modern XMP metadata aligned to Adobe Camera Raw preset structure.</li>
+            <li id="note3">Tone curves, gradient masks, and circular masks when present.</li>
+            <li id="note4">Configured group names via the input above.</li>
           </ul>
         </section>
 
         <section class="card results">
           <div class="results-head">
-            <h2>Results</h2>
+            <h2 id="resultsTitle">Results</h2>
             <p id="summary">No files converted yet.</p>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>Source</th>
-                  <th>Output</th>
-                  <th>Status</th>
-                  <th>Download</th>
+                  <th id="sourceHeader">Source</th>
+                  <th id="outputHeader">Output</th>
+                  <th id="statusHeader">Status</th>
+                  <th id="downloadHeader">Download</th>
                 </tr>
               </thead>
               <tbody id="resultsBody"></tbody>

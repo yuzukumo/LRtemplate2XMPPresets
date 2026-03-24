@@ -43,13 +43,48 @@ body {
   padding: 10px 0 2px;
 }
 
-.eyebrow {
-  margin: 0 0 6px;
-  color: var(--accent);
-  font-size: 0.8rem;
+.hero-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.locale-switcher {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.72);
+  box-shadow: 0 8px 24px rgba(63, 45, 22, 0.08);
+}
+
+.locale-button {
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  padding: 8px 12px;
+  transition: background 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.locale-button:hover {
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.locale-button.is-active {
+  background: var(--accent);
+  color: #fff7f1;
+}
+
+.locale-button:focus-visible {
+  outline: 2px solid rgba(181, 84, 47, 0.35);
+  outline-offset: 2px;
 }
 
 h1,
@@ -105,6 +140,13 @@ h2 {
   margin-top: 16px;
 }
 
+.field-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 label {
   display: block;
   margin-bottom: 8px;
@@ -121,6 +163,12 @@ input[type="file"] {
   background: var(--panel-strong);
   color: var(--ink);
   font: inherit;
+}
+
+input[type="text"]:disabled {
+  color: rgba(30, 27, 23, 0.5);
+  background: rgba(255, 253, 248, 0.65);
+  cursor: not-allowed;
 }
 
 .sr-only {
@@ -157,6 +205,31 @@ input[type="file"] {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.toggle input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.field-hint {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
 .drop-zone {
@@ -312,6 +385,10 @@ td code {
     padding-top: 2px;
   }
 
+  .hero-top {
+    justify-content: flex-start;
+  }
+
   h1 {
     max-width: 11ch;
     font-size: clamp(2rem, 11vw, 3rem);
@@ -331,5 +408,11 @@ td code {
 
   .actions .button {
     flex: 1 1 100%;
+  }
+
+  .field-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
   }
 }

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Centered light file icon">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="78%">
+      <stop offset="0" stop-color="#fffdfa" />
+      <stop offset="0.64" stop-color="#f6f1ff" />
+      <stop offset="1" stop-color="#ece7ff" />
+    </radialGradient>
+    <linearGradient id="frame" x1="14%" y1="86%" x2="86%" y2="14%">
+      <stop offset="0" stop-color="#ff9b61" />
+      <stop offset="0.3" stop-color="#ff5f86" />
+      <stop offset="0.66" stop-color="#5cc5ff" />
+      <stop offset="1" stop-color="#8f84ff" />
+    </linearGradient>
+    <linearGradient id="paper" x1="18%" y1="10%" x2="82%" y2="90%">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset="0.7" stop-color="#fbf8ff" />
+      <stop offset="1" stop-color="#f2edff" />
+    </linearGradient>
+    <linearGradient id="fold" x1="20%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#fff4da" />
+      <stop offset="1" stop-color="#ffd7b9" />
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="18" fill="url(#bg)" />
+
+  <path
+    d="M23 10h16l10 10v24c0 6-3 9-9 9H23c-6 0-9-3-9-9V19c0-6 3-9 9-9Z"
+    fill="url(#paper)"
+  />
+  <path
+    d="M39 10v5c0 3 2 5 5 5h5Z"
+    fill="url(#fold)"
+  />
+  <path
+    d="M23 10h16l10 10v24c0 6-3 9-9 9H23c-6 0-9-3-9-9V19c0-6 3-9 9-9Z"
+    fill="none"
+    stroke="url(#frame)"
+    stroke-linejoin="round"
+    stroke-width="3.2"
+  />
+
+  <path
+    d="M23 24h17"
+    fill="none"
+    stroke="#756f8f"
+    stroke-linecap="round"
+    stroke-width="3.2"
+  />
+
+  <path
+    d="M23 34h15"
+    fill="none"
+    stroke="#847ea0"
+    stroke-linecap="round"
+    stroke-width="3"
+  />
+  <path
+    d="M23 42h12"
+    fill="none"
+    stroke="#8b84a5"
+    stroke-linecap="round"
+    stroke-width="3"
+  />
+</svg>

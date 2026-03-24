@@ -4,7 +4,18 @@ English | [简体中文](./README.zh-CN.md) | [繁體中文（台灣）](./READM
 
 Convert legacy Lightroom `.lrtemplate` develop presets into modern `.xmp` preset files.
 
-## What It Generates
+## Use It Online
+
+Hosted web app: [bridge.yuuhi.de](https://bridge.yuuhi.de)
+
+For most users, this is all you need:
+
+- Runs entirely in the browser
+- No file upload
+- No self-deployment required
+- No Python CLI required
+
+## Output
 
 - Output type: `XMP preset`
 - `crs:PresetType="Normal"`
@@ -14,67 +25,35 @@ Convert legacy Lightroom `.lrtemplate` develop presets into modern `.xmp` preset
 
 This project does **not** convert presets into `Look/profile` XMP files.
 
-## Why This Direction
+## Why XMP Preset Instead Of Look
 
-Adobe documents that old `.lrtemplate` presets are migrated to the newer **XMP preset** format in Lightroom Classic.  
-That makes `.lrtemplate -> XMP preset` the closest and most correct migration target.
+Adobe documents that legacy `.lrtemplate` presets migrate to the newer **XMP preset** format in Lightroom Classic. That makes `.lrtemplate -> XMP preset` the closest and most correct migration target.
 
-Reference:
+References:
 
 - https://helpx.adobe.com/lightroom-classic/kb/preference-file-and-other-file-locations.html
 - https://helpx.adobe.com/lightroom-classic/help/apply-presets.html
 - https://developer.adobe.com/xmp/docs/xmp-namespaces/crs/
 - https://github.com/AdobeDocs/cis-photoshop-api-docs/blob/main/sample-code/lr-sample-app/crs.xml
 
-## Implementations
+## Optional Local Tools
 
-### Python CLI
+The repository still includes:
 
-File: [`lrtemp2xmp.py`](./lrtemp2xmp.py)
+- A pure frontend web app in [`public/`](./public/) for self-hosting
+- A Python CLI in [`lrtemp2xmp.py`](./lrtemp2xmp.py) for local verification or batch workflows
 
-Features:
-
-- Parses LRTemplate structure instead of loose regex extraction
-- Fails on unsupported nested tables instead of silently dropping them
-- Validates generated XMP before finishing
-
-Usage:
-
-```bash
-python3 lrtemp2xmp.py --input-dir ./presets --output-dir ./converted-xmp --group "User Presets"
-```
-
-### Cloudflare Worker Frontend
-
-Files:
-
-- [`public/`](./public/)
-- [`src/index.js`](./src/index.js)
-- [`wrangler.jsonc`](./wrangler.jsonc)
-
-Features:
-
-- Pure frontend conversion in the browser
-- No backend conversion service
-- Worker only serves static assets
-- Batch convert and download ZIP
-
-Reference:
-
-- https://developers.cloudflare.com/workers/static-assets/
-
-Run locally:
+Local web development:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Deploy:
+Optional CLI usage:
 
 ```bash
-npm install
-npm run deploy
+python3 lrtemp2xmp.py --input-dir ./presets --output-dir ./converted-xmp --group "User Presets"
 ```
 
 ## Supported Nested Structures
@@ -86,4 +65,4 @@ npm run deploy
 - `GradientBasedCorrections`
 - `CircularGradientBasedCorrections`
 
-If an unsupported nested setting appears, the converter raises an error on purpose.
+If an unsupported nested setting appears, the converter raises an error on purpose instead of silently dropping data.

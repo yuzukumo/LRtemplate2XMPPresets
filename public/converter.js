@@ -586,7 +586,7 @@ function stemFromName(fileName) {
 
 export function convertLrtemplateText(text, options = {}) {
   const fileName = options.fileName ?? "preset.lrtemplate";
-  const groupName = options.groupName ?? "User Presets";
+  const groupName = options.groupName === undefined ? "User Presets" : options.groupName;
   const root = parseLrtemplateText(text);
   const rootMap = keyed(root);
 
@@ -724,9 +724,10 @@ export function validateXmpText(xmpText, expectedGroup) {
     throw new ParseError("Output is missing a UUID");
   }
   const groupMatch = xmpText.match(
-    /<crs:Group>\s*<rdf:Alt>\s*<rdf:li xml:lang="x-default">([\s\S]*?)<\/rdf:li>/
+    /<crs:Group>\s*<rdf:Alt>\s*(?:<rdf:li xml:lang="x-default">([\s\S]*?)<\/rdf:li>|<rdf:li xml:lang="x-default"\s*\/>)/
   );
-  if (!groupMatch || groupMatch[1] !== expectedGroup) {
+  const groupValue = groupMatch ? (groupMatch[1] ?? "") : null;
+  if (groupValue === null || groupValue !== expectedGroup) {
     throw new ParseError("Output group does not match the requested group");
   }
   const nameMatch = xmpText.match(
