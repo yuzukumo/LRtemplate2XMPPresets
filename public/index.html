@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LRTemplate to XMP Preset</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">Pure Frontend Lightroom Tool</p>
+        <h1>Convert legacy <code>.lrtemplate</code> files into XMP presets</h1>
+        <p class="lede">
+          Conversion runs entirely in your browser. The Cloudflare Worker only
+          serves this static app and never uploads your preset files.
+        </p>
+      </section>
+
+      <section class="card controls">
+        <div class="field">
+          <label for="groupName">Preset group</label>
+          <input id="groupName" type="text" value="User Presets" />
+        </div>
+
+        <div class="field">
+          <label for="fileInput">Select <code>.lrtemplate</code> files</label>
+          <input id="fileInput" type="file" accept=".lrtemplate" multiple />
+        </div>
+
+        <div id="dropZone" class="drop-zone" tabindex="0">
+          Drop <code>.lrtemplate</code> files here
+        </div>
+
+        <div class="actions">
+          <button id="convertButton" class="button primary" type="button">
+            Convert Files
+          </button>
+          <button id="downloadButton" class="button" type="button" disabled>
+            Download ZIP
+          </button>
+          <button id="clearButton" class="button ghost" type="button">
+            Clear
+          </button>
+        </div>
+      </section>
+
+      <section class="card notes">
+        <h2>What this app outputs</h2>
+        <ul>
+          <li>XMP preset files with <code>crs:PresetType="Normal"</code>.</li>
+          <li>Modern XMP metadata aligned to Adobe Camera Raw preset structure.</li>
+          <li>Tone curves, gradient masks, and circular masks when present.</li>
+          <li>Configured group names via the input above.</li>
+        </ul>
+      </section>
+
+      <section class="card results">
+        <div class="results-head">
+          <h2>Results</h2>
+          <p id="summary">No files converted yet.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Output</th>
+                <th>Status</th>
+                <th>Download</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
