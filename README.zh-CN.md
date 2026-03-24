@@ -2,55 +2,51 @@
 
 [English](./README.md) | 简体中文 | [繁體中文（台灣）](./README.zh-TW.md)
 
-把旧版 Lightroom `.lrtemplate` 显影预设转换成现代 `.xmp` 预设文件。
+将旧版 Lightroom `.lrtemplate` 显影预设转换为 `.xmp` 预设文件。
 
-## 直接在线使用
+## 使用已部署的网页版
 
-已部署网页版：[bridge.yuuhi.de](https://bridge.yuuhi.de)
+可直接使用已部署的网页版：[https://bridge.yuuhi.de](https://bridge.yuuhi.de)。
 
-对大多数用户来说，直接打开网页就够了：
+该网页版在浏览器本地运行。预设文件不会上传。在大多数情况下，无需自行部署，也无需使用 Python CLI。
 
-- 转换完全在浏览器内完成
-- 不上传文件
-- 不需要自己部署
-- 不需要 Python CLI
+## 查看输出内容
 
-## 输出结果
-
-- 输出类型：`XMP preset`
+- `.xmp` 预设文件
 - `crs:PresetType="Normal"`
-- 使用现代 Camera Raw / Lightroom 预设元数据结构
-- 保留曲线
-- 在源文件存在时保留渐变和圆形局部修正
+- Camera Raw / Lightroom 预设元数据
+- 在源文件包含相关数据时保留曲线
+- 在源文件包含相关数据时保留渐变和圆形局部修正
 
-这个项目**不会**把预设转换成 `Look/profile` 类型的 XMP。
+本项目生成的是 XMP 预设，不生成 `Look/profile` 类型的 XMP 文件。
 
-## 为什么是 XMP Preset，不是 Look
+## 关于转换目标
 
-Adobe 官方文档说明，旧 `.lrtemplate` 预设在 Lightroom Classic 中会迁移成新的 **XMP preset** 格式。所以从兼容性和语义上看，`.lrtemplate -> XMP preset` 才是最接近官方路线、也最稳妥的目标。
+根据 Adobe 文档，旧版 `.lrtemplate` 预设会在 Lightroom Classic 中迁移到 XMP 预设格式。因此，本项目将 XMP 预设作为转换目标，而不是 Look。
 
-参考资料：
+参考文档：
 
-- https://helpx.adobe.com/lightroom-classic/kb/preference-file-and-other-file-locations.html
 - https://helpx.adobe.com/lightroom-classic/help/apply-presets.html
+- https://helpx.adobe.com/lightroom-classic/kb/preference-file-and-other-file-locations.html
+- https://helpx.adobe.com/camera-raw/using/camera-raw-settings.html
 - https://developer.adobe.com/xmp/docs/xmp-namespaces/crs/
 - https://github.com/AdobeDocs/cis-photoshop-api-docs/blob/main/sample-code/lr-sample-app/crs.xml
 
-## 可选的本地工具
+## 在本地运行
 
-仓库里仍然保留了：
+仓库中同时包含以下本地工具：
 
-- 可自行托管的纯前端网页版：[`public/`](./public/)
-- 用于本地校验或批量处理的 Python CLI：[`lrtemp2xmp.py`](./lrtemp2xmp.py)
+- 用于自托管的前端网页应用：[`public/`](./public/)
+- Python CLI：[`lrtemp2xmp.py`](./lrtemp2xmp.py)
 
-本地网页开发：
+在本地启动网页应用：
 
 ```bash
 npm install
 npm run dev
 ```
 
-可选 CLI 用法：
+运行 Python CLI：
 
 ```bash
 python3 lrtemp2xmp.py --input-dir ./presets --output-dir ./converted-xmp --group "User Presets"
@@ -65,4 +61,4 @@ python3 lrtemp2xmp.py --input-dir ./presets --output-dir ./converted-xmp --group
 - `GradientBasedCorrections`
 - `CircularGradientBasedCorrections`
 
-如果遇到不支持的嵌套设置，转换器会直接报错，而不是悄悄丢掉数据。
+如果检测到不支持的嵌套设置，转换器会返回错误，而不是省略相关数据。
